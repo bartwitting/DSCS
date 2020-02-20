@@ -1,0 +1,28 @@
+.container {
+  height: 40px;
+  width: 150px;
+  background: rgb(236, 251, 255);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  padding: 10px;
+}
+
+.container>div {
+  text-align: center;
+  background: rgb(0, 251, 255);
+}
+
+.container>div:hover {
+  cursor: pointer;
+  background: rgb(150, 251, 255);
+
+}
+
+.text {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  user-select: none;
+}
