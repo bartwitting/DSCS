@@ -1,9 +1,9 @@
-var option1, option2, option3 = 0;
 var totalVotes = 0;
-
+var votingBib = {};
+var winnerVoting;
 
 function vote(id){
-    console.log(id);
+    
     totalVotes += 1;
     updatePoints();
 }
@@ -19,5 +19,6 @@ function updatePoints(){
     // document.getElementById("total-votes").innerHTML = "Total Votes Casted: " + totalVotes;
     // document.getElementById("total-left").innerHTML = "Option A: " + pointA;
     document.getElementById("currentVotes").innerHTML = totalVotes;
+    document.getElementById("Winner").innerHTML = winnerVoting;
 }
 
