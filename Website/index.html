@@ -1,0 +1,30 @@
+<head>
+	<title>Voting system</title>
+	<link rel="stylesheet" type="text/css" href="index.css">
+	<script type="text/javascript" src="voting.js"></script>
+</head>
+
+<body>
+	<div>
+		<label>Current amount of votes:</label>
+		<label id="currentVotes"> 0 </label>
+	</div>
+	<div style="height: 20%, background-color: #808080">
+  		<div class="container" onclick="vote(1)">
+			<label for="option1"> I have a bike</label>
+  		</div>
+  		<div class="container" onclick="vote(2)">
+			<label for="option2"> I like saskia</label>
+  		</div>
+  		<div class="container" onclick="vote(3)">
+			<label for="option3"> I don't like saskia</label>
+  		</div>
+  		<div class="container" onclick="vote(4)">
+			<label for="option4"> Who is saskia</label>
+  		</div>
+    </div>
+    <div>
+		<label>Currently the most votes:</label>
+		<label id="Winner"> None </label>
+	</div>
+</body>
