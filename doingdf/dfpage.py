@@ -15,5 +15,16 @@ def dfpage():
 
     titles = ['na', 'Current playlist'])
 
+
+@app.route('/', methods=['POST', 'GET'])
+def button():
+    if request.method == "POST":
+        print ('Hello world!')
+
+    return render_template('home.html')
+
+
+
+
 if __name__ == '__main__':
     app.run(debug=True)
