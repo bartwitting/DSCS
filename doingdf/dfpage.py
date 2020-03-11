@@ -8,9 +8,7 @@ df.set_index(['title'], inplace=True)
 from flask import Flask
 from OpenSSL import SSL
 
-context = SSL.Context(SSL.PROTOCOL_TLSv1_2)
-context.use_privatekey_file('server.key')
-context.use_certificate_file('server.crt')
+
 
 app = Flask(__name__)
 
@@ -21,10 +19,10 @@ def dfpage():
     titles = ['na', 'Current playlist'])
 
 
-@app.route('/', methods=['POST', 'GET'])
+@app.route('/button')
 def button():
-    if request.method == "POST":
-        print ('Hello world!')
+    print("Hello World")
+    return "Hello World"
 
     return render_template('home.html')
 
