@@ -19,7 +19,7 @@ def dfpage():
     titles = ['na', 'Current playlist'])
 
 
-@app.route('/button')
+@app.route('/')
 def button():
     print("Hello World")
     return "Hello World"
