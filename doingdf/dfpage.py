@@ -18,13 +18,12 @@ def dfpage():
 
     titles = ['na', 'Current playlist'])
 
+@app.route('/background_process_test')
+def background_process_test():
+    print ("Hello")
+    return ("nothing")
 
-@app.route('/')
-def button():
-    print("Hello World")
-    return "Hello World"
 
-    return render_template('home.html')
 
 
 
