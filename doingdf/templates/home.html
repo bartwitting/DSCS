@@ -3,20 +3,27 @@
 <link rel=stylesheet type=text/css href='wauw.css'>
 <!doctype html>
 <title>Simple tables</title>
-<div class=page>
-  <h1>Playlists</h1>
-  {% for table in tables %}
-    <h2>{{titles[loop.index]}}</h2>
-    {{ table|safe }}
-  {% endfor %}
-</div>
+
 
 <html>
   <head>
   </head>
   <body>
-    <form  method = "post">
-     <input type="button" id='script' name="submit" value="Run Script">
-    </form>
+    <div class="row">
+      <div class="left">
+        <div class=page>
+          <h1>Playlists</h1>
+          {% for table in tables %}
+            <h2>{{titles[loop.index]}}</h2>
+            {{ table|safe }}
+          {% endfor %}
+        </div>
+      </div>
+      <div class="right">
+        <form  method = "post">
+          <input type="button" id='script' name="submit" value="Run Script">
+        </form>
+      </div>
+    </div>
   </body>
 </html>
