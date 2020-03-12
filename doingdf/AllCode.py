@@ -177,21 +177,23 @@ def filebuild():
         
 def WifiNum() :
 	filebuild()
-    with open('mac_adresses.json') as f:
-        data = json.load(f)
-    all_cellphones = [x for x in data['cellphones']]
-    threshold = -67 #Around 10 meters
-    cellphones_within_threshold = [x for x in all_cellphones if x['rssi'] > threshold]
-    filebuild()
-    return len(cellphones_within_threshold)
+	with open('mac_adresses.json') as file:
+		data = json.load(file)
+
+	all_cellphones = [x for x in data['cellphones']]
+	threshold = -67
+	cellphones_within_threshold = [x for x in all_cellphones if x['rssi'] > threshold]
+	filebuild()
+	print("WifiNum OK")
+	return len(cellphones_within_threshold)
 
 def DecibelNum():
-    os.system('pip install soundmeter') 
     batcmd="soundmeter --collect --seconds 5" 
     result1 = subprocess.check_output(batcmd, shell=True) 
     average_rms = int(result1[-7:-1])
     amount_of_db = 20 * math.log10(average_rms)
     amount_of_db_rounded = round(amount_of_db, 2)
+    print("DecibelNum OK")
     return amount_of_db_rounded
 
 def WeatherNum() :
@@ -205,6 +207,7 @@ def WeatherNum() :
     else:
         rain_mm = 0
     temperature = weathercall.get_temperature(unit='celsius')['temp']
+    print("WeatherNum OK")
     return [cloudiness,rain_mm, temperature]
     
 def getNums() :
@@ -216,9 +219,8 @@ def getNums() :
     rain = weather[1]
     now = datetime.datetime.now()
     time = now.hour
+    print("GetNums OK")
     return decibel, numPeople, temperature, rain, clouds, time
-
-getNums()
 
 
 ########################################################################################################################################
@@ -472,9 +474,9 @@ def RunAll(bron):
     loudness= Loudness(decibel, people, temperature, rain, clouds, time)
     tempo= Tempo(decibel, people, temperature, rain, clouds, time)
     valence= Valence(decibel, people, temperature, rain, clouds, time)
-    
+    print("RunAll OK")
     return [danceability, energy, loudness, tempo, valence]
 
 
-numbers = RunAll()
-print(numbers)
+numbers = getNums()
+print(RunAll(numbers))
