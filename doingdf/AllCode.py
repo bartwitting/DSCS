@@ -24,6 +24,9 @@ oldfeatures = [0,0,0,0,0]
 
 ########################################################################################################################################
 
+userURL = ""
+userIDSpotify = ""
+playlistID = ""
 
 def get_playlist_tracks(credentials,username,playlist_id):
     #set scope to retreive public data
@@ -477,6 +480,19 @@ def RunAll(bron):
     print("RunAll OK")
     return [danceability, energy, loudness, tempo, valence]
 
+def lenListCheck():
+    return True
 
-numbers = getNums()
-print(RunAll(numbers))
+print(oldfeatures)
+def spotifyListBuilder(oldfeatures,credentials,musicData):
+    surroundings = getNums()
+    features = RunAll(surroundings)
+    if lenListCheck():
+        remove_tracks_from_df(credentials,'5yJfsUa3aWq20QhPLGwtig',musicData,oldfeatures)
+        
+    add_tracks_from_df(credentials,'5yJfsUa3aWq20QhPLGwtig',musicData,features)
+    oldfeatures = features
+    
+    return features
+oldfeatures = spotifyListBuilder(oldfeatures,credentials,musicData)
+print(oldfeatures)
