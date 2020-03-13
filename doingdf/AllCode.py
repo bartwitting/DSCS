@@ -19,8 +19,6 @@ API_key = '6ff7fde73bb9cccf854fd26d31b4fe6d'
 owm = OWM(API_key)
 cache = LRUCache()
 
-oldfeatures = [0,0,0,0,0]
-
 
 ########################################################################################################################################
 
@@ -480,19 +478,14 @@ def RunAll(bron):
     print("RunAll OK")
     return [danceability, energy, loudness, tempo, valence]
 
-def lenListCheck():
-    return True
 
-print(oldfeatures)
-def spotifyListBuilder(oldfeatures,credentials,musicData):
+
+
+def spotifyListBuilder(ocredentials,musicData):
     surroundings = getNums()
     features = RunAll(surroundings)
-    if lenListCheck():
-        remove_tracks_from_df(credentials,'5yJfsUa3aWq20QhPLGwtig',musicData,oldfeatures)
-        
     add_tracks_from_df(credentials,'5yJfsUa3aWq20QhPLGwtig',musicData,features)
-    oldfeatures = features
     
-    return features
-oldfeatures = spotifyListBuilder(oldfeatures,credentials,musicData)
-print(oldfeatures)
+    return features,surroundings
+
+spotifyListBuilder(credentials,musicData)
