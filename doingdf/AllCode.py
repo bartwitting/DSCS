@@ -509,9 +509,6 @@ def RunAll(bron):
     print("RunAll OK")
     return [danceability, energy, loudness, tempo, valence]
 
-
-update_store_list(credentials,'5yJfsUa3aWq20QhPLGwtig',datafroem,features)
-
 def spotifyListBuilder(credits,musicData):
     surroundings = getNums()
     features = RunAll(surroundings)
