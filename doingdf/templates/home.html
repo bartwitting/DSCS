@@ -3,7 +3,7 @@
 <head>
 <link rel=stylesheet type=text/css href='/../static/wauw.css'>
 
-<title>Simple tables</title>
+<title>Playlist</title>
 
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"> </script>
     <script type=text/javascript> $(function() { $("#mybutton").click(function (event) { $.getJSON('/SomeFunction', { },
@@ -22,15 +22,15 @@
           {% endfor %}
         </div>
       </div>
-      //button
+      <h1>The current situation</h1>
+      <h2>{{ forward_message }}</h2>
       <div class='container'>
         <form action="/forward/" method="post">
-            <button name="forwardBtn" type="submit">Forward</button>
+            <button name="forwardBtn" type="submit" onclick="$('#loading').show();" >Run file</button>
         </form>
-
-        {{ forward_message }}
-
       </div>
+    <div id="loading" style="display:none;"><img src="https://media.giphy.com/media/tXL4FHPSnVJ0A/giphy-downsized.gif" alt="" />Loading!</div>
+    </body>
     </div>
   </body>
 </html>
