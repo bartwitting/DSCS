@@ -263,7 +263,7 @@ def WeatherNum() :
     
 def getNums() :
     numPeople = WifiNum()
-    decibel = DecibelNum()
+    decibel = DecibelNum2()
     weather = WeatherNum()
     temperature = weather[2]
     clouds = weather[0]
