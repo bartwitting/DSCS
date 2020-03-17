@@ -8,21 +8,28 @@ table.dataframe, .dataframe th, .dataframe td {
   border: none;
   border-bottom: 1px solid #C8C8C8;
   border-collapse: collapse;
-  text-align:left;
+  text-align:center;
   padding: 10px;
-  margin-bottom: 40px;
+  margin-bottom: 10px;
   font-size: 0.9em;
+}
+
+
+.dataframe playlist{
+
+  text-align: center;
 }
 
 .playlist th {
     background-color: #77dd77;
     color: white;
+    text-align: center;
 }
 
 tr:nth-child(odd)       { background-color:#eee; }
 tr:nth-child(even)  { background-color:#fff; }
 
-tr:hover            { background-color: #000000;}
+tr:hover            { background-color: #4E7566;}
 
 
 .row {
@@ -42,4 +49,28 @@ tr:hover            { background-color: #000000;}
 	float: right;
 	width: 30%;
 	background-color: #D3D3D3;
+}
+
+
+
+button {
+color: #fff;
+text-transform: uppercase;
+text-decoration: none;
+background: #1DB954;
+padding: 20px;
+border-radius: 5px;
+border: none;
+transition: all 0.4s ease 0s;
+margin:auto;
+display:block;
+}
+
+button:hover {
+background: #434343;
+letter-spacing: 1px;
+-webkit-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
+-moz-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
+box-shadow: 5px 40px -10px rgba(0,0,0,0.57);
+transition: all 0.4s ease 0s;
 }
