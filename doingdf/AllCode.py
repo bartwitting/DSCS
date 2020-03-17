@@ -20,11 +20,21 @@ owm = OWM(API_key)
 cache = LRUCache()
 
 
+GLOBALMusicDataframe = pd.DataFrame()
+GLOBALCurrentSongList = pd.DataFrame()
+
+
 ########################################################################################################################################
 
 userURL = ""
 userIDSpotify = ""
 playlistID = ""
+
+credentials = ['bartw26396', '5711bc132b4c48ceb5bbd19cd65b1e63', 'f507991961c948d8bf1b62ae6ef5ab15', 'http://localhost']
+playlists = {'Kasper Langendoen':'4W7jnrqeKfVEnb1BVHMG5b', 'Top 50 Wereld':'37i9dQZEVXbMDoHDwVN2tF', 'NPO Radio 2':'1DTzz7Nh2rJBnyFbjsH1Mh',\
+'daryl zandvliet':'6PoHyrIELxnRlRKOsI5yhW', 'Slam Official':'0OdWlUFdB6Lio5dIdXY81O', 'Bouke Bosma':'70aT8IllF7t6CLcPf2pt99'}
+
+
 
 def get_playlist_tracks(credentials,username,playlist_id):
     #set scope to retreive public data
@@ -96,6 +106,9 @@ def add_tracks_from_df(credentials,playlist,dataframe,features):
     else:
         print("There are no suitable songs in your collection")
     
+    global GLOBALCurrentSongList
+    GLOBALCurrentSongList = selection['artist']
+
 def remove_tracks_from_df(credentials,playlist,dataframe,features):
     scope_playlist = 'playlist-modify-public'
     token = util.prompt_for_user_token(credentials[0],scope_playlist,credentials[1],credentials[2],credentials[3])
@@ -125,7 +138,7 @@ def update_store_list(credentials,playlist,dataframe,features):
         add_tracks_from_df(credentials,playlist,dataframe,features)
     else:
         songs =[]
-        for x in list_length:
+        for x in store_list :
             songs.append(x['track']['id'])
         print('Clearing Playlist...')
         sp.user_playlist_remove_all_occurrences_of_tracks(credentials[0],playlist, songs[:100])
@@ -133,17 +146,16 @@ def update_store_list(credentials,playlist,dataframe,features):
         print('Updating Playlist...')
         add_tracks_from_df(credentials,playlist,dataframe,features)
 
-
-credentials = ['bartw26396', '5711bc132b4c48ceb5bbd19cd65b1e63', 'f507991961c948d8bf1b62ae6ef5ab15', 'http://localhost']
-playlists = {'Kasper Langendoen':'4W7jnrqeKfVEnb1BVHMG5b', 'Top 50 Wereld':'37i9dQZEVXbMDoHDwVN2tF', 'NPO Radio 2':'1DTzz7Nh2rJBnyFbjsH1Mh',\
-'daryl zandvliet':'6PoHyrIELxnRlRKOsI5yhW', 'Slam Official':'0OdWlUFdB6Lio5dIdXY81O', 'Bouke Bosma':'70aT8IllF7t6CLcPf2pt99'}
-
-
-datafroem = pd.DataFrame()
-for key, value in playlists.items():
-    tracklist = get_playlist_tracks(credentials, key,value)
-    data = get_features(tracklist)
-    datafroem = datafroem.append(data)
+def BuildMusicDataFrame(credentials, playlists) :
+    datafroem = pd.DataFrame()
+    for key, value in playlists.items():
+        tracklist = get_playlist_tracks(credentials, key,value)
+        data = get_features(tracklist)
+        datafroem = datafroem.append(data)
+    global GLOBALMusicDataframe
+    GLOBALMusicDataframe = datafroem
+    
+    return datafroem
 
 
 ########################################################################################################################################
@@ -227,6 +239,13 @@ def DecibelNum():
     amount_of_db_rounded = round(amount_of_db, 2)
     print("DecibelNum OK")
     return amount_of_db_rounded
+
+def DecibelNum2():
+    declist=[]
+    for i in range(5):
+        declist.append(random.randint(30,130))
+    dec = sum(declist)/len(declist)
+    return dec
 
 def WeatherNum() :
     place = owm.weather_at_place('Muiden,NL')
@@ -499,21 +518,48 @@ def Valence(decibel, people, temperature, rain, clouds, time):
     va_total= (score_ruis + score_mens + score_temp + score_regen + score_wolk + score_uur)/1000
     return va_total
 
-def RunAll(bron):
-    decibel, people, temperature, rain, clouds, time = bron[0], bron[1], bron[2], bron[3], bron[4], bron[5]
+def RunAll(source):
+    decibel, people, temperature, rain, clouds, time = source[0], source[1], source[2], source[3], source[4], source[5]
     danceability = Danceability(decibel, people, temperature, rain, clouds, time)
     energy = Energy(decibel, people, temperature, rain, clouds, time)
     loudness= Loudness(decibel, people, temperature, rain, clouds, time)
     tempo= Tempo(decibel, people, temperature, rain, clouds, time)
     valence= Valence(decibel, people, temperature, rain, clouds, time)
     print("RunAll OK")
+    
     return [danceability, energy, loudness, tempo, valence]
+
+def StatRetrieval(source, features):
+    namelist1 = ['danceability','energy','loudness','tempo','valence']
+    namelist2 = ['Decibel', 'NumPeople', 'Temperature', 'Rain', 'Clouds', 'Time']
+    Numlist = []
+    DataList = []
+    for i in range(len(features)):
+        Numlist.append((namelist1[i],features[i]))
+    for i in range(len(source)):
+        DataList.append((namelist2[i],source[i]))
+    
+    return Numlist, DataList
 
 def spotifyListBuilder(credits,musicData):
     surroundings = getNums()
     features = RunAll(surroundings)
     update_store_list(credits,'5yJfsUa3aWq20QhPLGwtig',musicData,features)
-    print("Done",features)
-    return features,surroundings
+    print("Done, Spotify Filled",features)
+    return surroundings, features
 
-spotifyListBuilder(credentials,datafroem)
+
+def RunTheCode(new, credentials, playlists):
+    if new:
+        BuildMusicDataFrame(credentials, playlists)
+        print("MusicDataFrame is filled")
+    result = spotifyListBuilder(credentials,GLOBALMusicDataframe)
+    print("Fully Done!")
+    currentStats = StatRetrieval(result[0],result[1])
+    
+    return currentStats
+
+def Start(Keuze):
+    currentStats = RunTheCode(Keuze, credentials, playlists)
+    return currentStats, GLOBALCurrentSongList
+
