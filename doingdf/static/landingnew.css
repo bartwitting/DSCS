@@ -45,6 +45,8 @@ p{font-family: 'Helvetica Neue', sans-serif;
   transition: all 0.4s ease 0s;
   margin:auto;
   display:block;
+  width:15;
+  
   }
 
   button:hover {
@@ -66,4 +68,19 @@ p{font-family: 'Helvetica Neue', sans-serif;
     bottom: 0px;
     margin: 0 auto;
        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+ }
+
+ div.container{
+   text-align:center;
+
+}
+div.gifje{text-align: center;
+
+
+
+
+ }
+
+ form-inline{
+   text-align: center;
  }

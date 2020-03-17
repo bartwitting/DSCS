@@ -64,6 +64,7 @@ border: none;
 transition: all 0.4s ease 0s;
 margin:auto;
 display:block;
+width: 15%;
 }
 
 button:hover {
