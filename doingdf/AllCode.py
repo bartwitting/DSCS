@@ -19,8 +19,6 @@ API_key = '6ff7fde73bb9cccf854fd26d31b4fe6d'
 owm = OWM(API_key)
 cache = LRUCache()
 
-oldfeatures = [0,0,0,0,0]
-
 
 ########################################################################################################################################
 
@@ -70,6 +68,7 @@ def get_features(tracks):
     df = pd.DataFrame(dataframe)
     df = df.filter(['title', 'artist', 'danceability','energy', 'loudness', 'tempo','valence', 'popularity','id'])
     df = df.set_index('title')
+    print("Finished collecting Songs")
     return df
 
 def add_tracks_from_df(credentials,playlist,dataframe,features):
@@ -77,26 +76,31 @@ def add_tracks_from_df(credentials,playlist,dataframe,features):
     token = util.prompt_for_user_token(credentials[0],scope_playlist,credentials[1],credentials[2],credentials[3])
     sp = spotipy.Spotify(auth=token)
     #make selection based on feature input
+    dataframe = dataframe.drop_duplicates()
     selection = dataframe.loc[(dataframe['danceability'].between(features[0]-0.1, features[0]+0.1, inclusive=False)) &\
     (dataframe['energy'].between(features[1]-0.2, features[1]+0.2, inclusive=False)) &\
     (dataframe['loudness'].between(features[2]-5, features[2]+5, inclusive=False)) &\
     (dataframe['tempo'].between(features[3]-40, features[3]+40, inclusive=False)) &\
-    (dataframe['valence'].between(features[4]-0.5, features[4]+0.5, inclusive=False)) &\
+    (dataframe['valence'].between(features[4]-0.5, features[4]+0.5, inclusive=False))] 
     #remove unwanted artists
-    (~dataframe['artist'].isin(['Ariana Grande']))]
+    # & (~dataframe['artist'].isin(['Ariana Grande']))]
     selection.sort_values(by=['popularity'], ascending=False)
     songs = selection['id'].tolist()
     
-    scope_playlist = 'playlist-modify-public'
-    token2 = util.prompt_for_user_token(credentials[0],scope_playlist,credentials[1],credentials[2],credentials[3])
-    sp2 = spotipy.Spotify(auth=token2)
-    sp2.user_playlist_add_tracks(credentials[0],playlist, songs)
-    print("Songs Succesfully Added to Playlist")
+    if len(songs) > 0:
+        scope_playlist = 'playlist-modify-public'
+        token = util.prompt_for_user_token(credentials[0],scope_playlist,credentials[1],credentials[2],credentials[3])
+        sp = spotipy.Spotify(auth=token)
+        sp.user_playlist_add_tracks(credentials[0],playlist, songs[:100])
+        print("Songs Succesfully Added to Playlist")
+    else:
+        print("There are no suitable songs in your collection")
     
 def remove_tracks_from_df(credentials,playlist,dataframe,features):
     scope_playlist = 'playlist-modify-public'
     token = util.prompt_for_user_token(credentials[0],scope_playlist,credentials[1],credentials[2],credentials[3])
     sp = spotipy.Spotify(auth=token)
+    dataframe = dataframe.drop_duplicates()
     selection = dataframe.loc[(dataframe['danceability'].between(features[0]-0.1, features[0]+0.1, inclusive=False)) &\
     (dataframe['energy'].between(features[1]-0.2, features[1]+0.2, inclusive=False)) &\
     (dataframe['loudness'].between(features[2]-5, features[2]+5, inclusive=False)) &\
@@ -106,15 +110,40 @@ def remove_tracks_from_df(credentials,playlist,dataframe,features):
     songs = selection['id'].tolist()
     
     scope_playlist = 'playlist-modify-public'
-    token2 = util.prompt_for_user_token(credentials[0],scope_playlist,credentials[1],credentials[2],credentials[3])
-    sp2 = spotipy.Spotify(auth=token2)
-    sp2.user_playlist_remove_all_occurrences_of_tracks(credentials[0],playlist, songs)
+    token = util.prompt_for_user_token(credentials[0],scope_playlist,credentials[1],credentials[2],credentials[3])
+    sp = spotipy.Spotify(auth=token)
+    sp.user_playlist_remove_all_occurrences_of_tracks(credentials[0],playlist, songs[:100])
     print("Songs Succesfully Removed from Playlist")
+    
+def update_store_list(credentials,playlist,dataframe,features):
+    scope_playlist = 'playlist-modify-public'
+    token = util.prompt_for_user_token(credentials[0],scope_playlist,credentials[1],credentials[2],credentials[3])
+    sp = spotipy.Spotify(auth=token)
+    store_list = get_playlist_tracks(credentials,'bartw26396','5yJfsUa3aWq20QhPLGwtig')
+    if len(store_list) == 0:
+        print('Updating Playlist...')
+        add_tracks_from_df(credentials,playlist,dataframe,features)
+    else:
+        songs =[]
+        for x in list_length:
+            songs.append(x['track']['id'])
+        print('Clearing Playlist...')
+        sp.user_playlist_remove_all_occurrences_of_tracks(credentials[0],playlist, songs[:100])
+        print("Songs Succesfully Removed from Playlist")
+        print('Updating Playlist...')
+        add_tracks_from_df(credentials,playlist,dataframe,features)
+
 
 credentials = ['bartw26396', '5711bc132b4c48ceb5bbd19cd65b1e63', 'f507991961c948d8bf1b62ae6ef5ab15', 'http://localhost']
-tracklist = get_playlist_tracks(credentials, 'tillyxh','1TFZPafSKEeh31U9fky1vW')
+playlists = {'Kasper Langendoen':'4W7jnrqeKfVEnb1BVHMG5b', 'Top 50 Wereld':'37i9dQZEVXbMDoHDwVN2tF', 'NPO Radio 2':'1DTzz7Nh2rJBnyFbjsH1Mh',\
+'daryl zandvliet':'6PoHyrIELxnRlRKOsI5yhW', 'Slam Official':'0OdWlUFdB6Lio5dIdXY81O', 'Bouke Bosma':'70aT8IllF7t6CLcPf2pt99'}
 
-musicData = get_features(tracklist)
+
+datafroem = pd.DataFrame()
+for key, value in playlists.items():
+    tracklist = get_playlist_tracks(credentials, key,value)
+    data = get_features(tracklist)
+    datafroem = datafroem.append(data)
 
 
 ########################################################################################################################################
@@ -480,19 +509,11 @@ def RunAll(bron):
     print("RunAll OK")
     return [danceability, energy, loudness, tempo, valence]
 
-def lenListCheck():
-    return True
-
-print(oldfeatures)
-def spotifyListBuilder(oldfeatures,credentials,musicData):
+def spotifyListBuilder(credits,musicData):
     surroundings = getNums()
     features = RunAll(surroundings)
-    if lenListCheck():
-        remove_tracks_from_df(credentials,'5yJfsUa3aWq20QhPLGwtig',musicData,oldfeatures)
-        
-    add_tracks_from_df(credentials,'5yJfsUa3aWq20QhPLGwtig',musicData,features)
-    oldfeatures = features
-    
-    return features
-oldfeatures = spotifyListBuilder(oldfeatures,credentials,musicData)
-print(oldfeatures)
+    update_store_list(credits,'5yJfsUa3aWq20QhPLGwtig',musicData,features)
+    print("Done",features)
+    return features,surroundings
+
+spotifyListBuilder(credentials,datafroem)
