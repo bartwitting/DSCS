@@ -27,10 +27,14 @@ GLOBALCurrentSongList = pd.DataFrame()
 ########################################################################################################################################
 
 userURL = ""
-userIDSpotify = ""
-playlistID = ""
+userID = ""
+playListID = ""
 
-credentials = ['bartw26396', '5711bc132b4c48ceb5bbd19cd65b1e63', 'f507991961c948d8bf1b62ae6ef5ab15', 'http://localhost']
+userID, playListID = "bartw26396", "5yJfsUa3aWq20QhPLGwtig"
+#userID, playListID = "zwamborn", "4jwcDPU0HyEw0cOAPPFOdp"
+print("Use this to run the code and fill the 'bool' place with True(will also fill the MusicData) or False(Just changing the playlist) : python3 -c 'from AllCode import*; Start(bool)' ")
+
+credentials = [userID, '5711bc132b4c48ceb5bbd19cd65b1e63', 'f507991961c948d8bf1b62ae6ef5ab15', 'http://localhost']
 playlists = {'Kasper Langendoen':'4W7jnrqeKfVEnb1BVHMG5b', 'Top 50 Wereld':'37i9dQZEVXbMDoHDwVN2tF', 'NPO Radio 2':'1DTzz7Nh2rJBnyFbjsH1Mh',\
 'daryl zandvliet':'6PoHyrIELxnRlRKOsI5yhW', 'Slam Official':'0OdWlUFdB6Lio5dIdXY81O', 'Bouke Bosma':'70aT8IllF7t6CLcPf2pt99'}
 
@@ -132,7 +136,7 @@ def update_store_list(credentials,playlist,dataframe,features):
     scope_playlist = 'playlist-modify-public'
     token = util.prompt_for_user_token(credentials[0],scope_playlist,credentials[1],credentials[2],credentials[3])
     sp = spotipy.Spotify(auth=token)
-    store_list = get_playlist_tracks(credentials,'bartw26396','5yJfsUa3aWq20QhPLGwtig')
+    store_list = get_playlist_tracks(credentials,userID,playListID)
     if len(store_list) == 0:
         print('Updating Playlist...')
         add_tracks_from_df(credentials,playlist,dataframe,features)
@@ -544,7 +548,7 @@ def StatRetrieval(source, features):
 def spotifyListBuilder(credits,musicData):
     surroundings = getNums()
     features = RunAll(surroundings)
-    update_store_list(credits,'5yJfsUa3aWq20QhPLGwtig',musicData,features)
+    update_store_list(credits,playListID,musicData,features)
     print("Done, Spotify Filled",features)
     return surroundings, features
 
