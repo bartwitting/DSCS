@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel=stylesheet type=text/css href='/../static/wauw.css'>
+<link rel=stylesheet type=text/css href='/../static/playlists.css'>
 
 <title>Playlist</title>
 
@@ -9,6 +9,7 @@
     <script type=text/javascript> $(function() { $("#mybutton").click(function (event) { $.getJSON('/SomeFunction', { },
     function(data) { }); return false; }); }); </script>
 </head>
+
 
 
   <body>
@@ -22,6 +23,17 @@
           {% endfor %}
         </div>
       </div>
+      <form method="POST">
+        <div class='container'>
+        <div class="form-inline">
+          <div class="form-group">
+            <p>Name <input type = "submit" name = "Username" /></p>
+            <p>Playlist link <input type = "submit" name = "Spotifylink" /></p>
+          </div>
+          </div>
+          </div>
+          
+
       <h1>The current situation</h1>
       <h2>{{ forward_message }}</h2>
       <h2> {{Username}}</h2>

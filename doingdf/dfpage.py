@@ -17,25 +17,42 @@ app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 
 @app.route('/', methods=['POST','GET'])
 def dfpage():
-  if request.method == 'POST':
+    if request.method == 'POST':
+        print ('hallo!!!')
+        item = request.form['Username']
+        print (item)
+        session["Username"]=item
+        session['Spotifylink']= request.form.get("Spotifylink", 'sukkel')
+        return render_template('index.html')
+    else:
+        print('wtf is dit')
+        return render_template('index.html')
 
-      Username = request.form['username']
-      Spotifylink = request.form['Spotifylink']
 
-      return redirect(Username.url)
+      #return render_template('index.html')
       #return render_template('index.html',haha1=Username,haha2=Spotifylink)
-  return render_template('index.html')
 
 
-@app.route("/forward/", methods=['POST'])
+
+@app.route("/forward/", methods=['POST','GET'])
 def move_forward():
-    time.sleep(10)
+    #Username = session['Username']
+    #Spotifylink = session['Spotifylink']
+    #iliketrains = request.form['iliketrains']
+    Username = session.get('Username')
+    print (Username)
+    Spotifylink=session.get('Spotifylink')
     now = time_.now()
     forward_message = now
     df = pd.read_csv('https://raw.githubusercontent.com/bartwitting/DSCS/master/afspeellijsten/Road.csv')
     df = df[['title','artist']]
+
+    time.sleep(10)
+        #print(brew_type)
+    return render_template('playlists.html', forward_message=forward_message,tables =[df.to_html(classes='playlist')],titles = ['na', 'Current playlist'], Username=Username, Spotifylink=Spotifylink)
+
     #df.set_index(['title'], inplace=True)
-    return render_template('home.html', forward_message=forward_message,tables =[df.to_html(classes='playlist')],titles = ['na', 'Current playlist'])
+    #, Spotifylink=session['Spotifylink'])
 
 
 if __name__ == '__main__':

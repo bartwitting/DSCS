@@ -1,14 +1,12 @@
 <!DOCTYPE html>
 <html>
-<link rel=stylesheet type=text/css href='/../static/landingnew.css'>
+<link rel=stylesheet type=text/css href='/../static/landingpage.css'>
 <title>Application</title>
+
 
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"> </script>
     <script type=text/javascript> $(function() { $("#mybutton").click(function (event) { $.getJSON('/SomeFunction', { },
     function(data) { }); return false; }); }); </script>
-
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
-
 
 
 </head>
@@ -19,18 +17,17 @@
 <h1> Spotistore </h1>
 <h2>Generating spotify playlists based on the weather, time, amount of people and sound in the store
 </h2> <br>
+
 <form method="POST">
   <div class='container'>
   <div class="form-inline">
     <div class="form-group">
-      <input type="email" class="line-input" name="userEmail" placeholder="Link">
+      <p>Name <input type = "text" name = "Username" /></p>
+      <p>Playlist link <input type = "text" name = "Spotifylink" /></p>
     </div>
-    <br>
-    <br>
-    <div class="form-group">
-      <input type="email" class="line-input" name="userPassword" placeholder="Spotify link">
     </div>
-  </div>
+    </div>
+
 
   </form>
 <br>
@@ -43,13 +40,14 @@
   <br>
   <br>
   <div class='gifje'>
-<div id="loading" style="display:none;"><img src="https://media.giphy.com/media/tXL4FHPSnVJ0A/giphy-downsized.gif" alt="" />Loading!</div>
 </div>
 </body>
 <footer>
 <!--
 <div class="foot">
 <p>Copyright © 2020</p>
+https://media.giphy.com/media/tXL4FHPSnVJ0A/giphy-downsized.gif
+-->
 </div>
 -->
 </footer>
