@@ -39,13 +39,14 @@ def SaveIDs(user, playlist):
 
 #userID, playListID = "bartw26396", "5yJfsUa3aWq20QhPLGwtig"
 #userID, playListID = "zwamborn", "4jwcDPU0HyEw0cOAPPFOdp"
-print("Use this to run the code and fill the 'bool' place with True(will also fill the MusicData) or False(Just changing the playlist) : python3 -c 'from AllCode import*; Start(bool)' ")
+#userID, playlistID = '1120601939', '6P2NFNZizlqu6eelFAajRd'
+#print("Use this to run the code and fill the 'bool' place with True(will also fill the MusicData) or False(Just changing the playlist) : python3 -c 'from AllCode import*; Start(bool)' ")
 
 credentials = [userID, '5711bc132b4c48ceb5bbd19cd65b1e63', 'f507991961c948d8bf1b62ae6ef5ab15', 'http://localhost']
 #playlists = {'Kasper Langendoen':'4W7jnrqeKfVEnb1BVHMG5b', 'Top 50 Wereld':'37i9dQZEVXbMDoHDwVN2tF', 'NPO Radio 2':'1DTzz7Nh2rJBnyFbjsH1Mh',\
 #'daryl zandvliet':'6PoHyrIELxnRlRKOsI5yhW', 'Slam Official':'0OdWlUFdB6Lio5dIdXY81O', 'Bouke Bosma':'70aT8IllF7t6CLcPf2pt99'}
 
-playlist = {'Kasper Langendoen':'4W7jnrqeKfVEnb1BVHMG5b', 'Top 50 Wereld':'37i9dQZEVXbMDoHDwVN2tF'}
+playlists = {'Kasper Langendoen':'4W7jnrqeKfVEnb1BVHMG5b', 'Top 50 Wereld':'37i9dQZEVXbMDoHDwVN2tF'}
 
 def get_playlist_tracks(credentials,username,playlist_id):
     #set scope to retreive public data
@@ -118,7 +119,7 @@ def add_tracks_from_df(credentials,playlist,dataframe,features):
         print("There are no suitable songs in your collection")
 
     global GLOBALCurrentSongList
-    GLOBALCurrentSongList = selection['artist']
+    GLOBALCurrentSongList = selection
 
 def remove_tracks_from_df(credentials,playlist,dataframe,features):
     scope_playlist = 'playlist-modify-public'
@@ -273,7 +274,6 @@ def WeatherNum() :
     return [cloudiness,rain_mm, temperature]
 
 def getNums() :
-    numPeople = WifiNum()
     decibel = DecibelNum2()
     weather = WeatherNum()
     temperature = weather[2]
@@ -281,6 +281,7 @@ def getNums() :
     rain = weather[1]
     now = datetime.datetime.now()
     time = now.hour
+    numPeople = WifiNum()
     print("GetNums OK")
     return decibel, numPeople, temperature, rain, clouds, time
 
@@ -571,6 +572,8 @@ def RunTheCode(new, credentials, playlists):
     return currentStats
 
 def Start(Keuze):
+    global userID,playListID
+    print(userID,playListID)
     currentStats = RunTheCode(Keuze, credentials, playlists)
     print('start gedaan!')
     return currentStats, GLOBALCurrentSongList
