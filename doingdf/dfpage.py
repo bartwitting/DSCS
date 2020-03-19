@@ -25,13 +25,14 @@ def move_forward():
         print ('hallo!!!')
         Spotusername = request.form['Username']
         Playlink = request.form['Spotifylink']
+        weatherPlace = request.form['placeWeather']
         #df = pd.read_csv('https://raw.githubusercontent.com/bartwitting/DSCS/master/afspeellijsten/Road.csv')
         #df = df[['title','artist']]
-        SaveIDs(Spotusername,Playlink)
+        SaveIDs(Spotusername,Playlink, weatherPlace)
         results = Start(True)
         df = results[1]
         forward_message = results[0]
-        return render_template('playlists.html',forward_message=forward_message,tables =[df.to_html(classes='playlist')],titles = ['na', 'Current playlist'], Username=Spotusername, Spotifylink=Playlink)
+        return render_template('playlists.html',forward_message=forward_message,tables =[df.to_html(classes='playlist')],titles = ['na', 'Current playlist'], Username=Spotusername, Spotifylink=Playlink, Weatherplace=weatherPlace)
 
     else:
         results = Start(False)

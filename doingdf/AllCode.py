@@ -28,12 +28,14 @@ GLOBALCurrentSongList = pd.DataFrame()
 userURL = ""
 userID = ""
 playListID = ""
+placeWeather=""
 
-def SaveIDs(user, playlist):
-    global userID, playListID
+def SaveIDs(user, playlist, place):
+    global userID, playListID, placeWeather
     userID = user
     playListID = playlist
-    print (userID,playListID)
+    placeWeather= place
+    print (userID,playListID, placeWeather)
 
 
 
@@ -46,7 +48,7 @@ credentials = [userID, '5711bc132b4c48ceb5bbd19cd65b1e63', 'f507991961c948d8bf1b
 #playlists = {'Kasper Langendoen':'4W7jnrqeKfVEnb1BVHMG5b', 'Top 50 Wereld':'37i9dQZEVXbMDoHDwVN2tF', 'NPO Radio 2':'1DTzz7Nh2rJBnyFbjsH1Mh',\
 #'daryl zandvliet':'6PoHyrIELxnRlRKOsI5yhW', 'Slam Official':'0OdWlUFdB6Lio5dIdXY81O', 'Bouke Bosma':'70aT8IllF7t6CLcPf2pt99'}
 
-playlists = {'Kasper Langendoen':'4W7jnrqeKfVEnb1BVHMG5b', 'Top 50 Wereld':'37i9dQZEVXbMDoHDwVN2tF'}
+playlists = {'Kasper Langendoen':'4W7jnrqeKfVEnb1BVHMG5b', 'Top 50 Wereld':'37i9dQZEVXbMDoHDwVN2tF','Slam Official':'0OdWlUFdB6Lio5dIdXY81O'}
 
 def get_playlist_tracks(credentials,username,playlist_id):
     #set scope to retreive public data
@@ -229,7 +231,7 @@ def filebuild():
     if os.path.exists("mac_adresses.json"):
         os.remove("mac_adresses.json")
     else:
-        os.system("howmanypeoplearearound --out mac_adresses.json --adapter en0 --scantime 20 --sort")
+        os.system("howmanypeoplearearound --out mac_adresses.json --adapter en0 --scantime 10 --sort")
 
 def WifiNum() :
 	filebuild()
@@ -260,7 +262,8 @@ def DecibelNum2():
     return dec
 
 def WeatherNum() :
-    place = owm.weather_at_place('Muiden,NL')
+    global placeWeather
+    place = owm.weather_at_place(placeWeather)
     weathercall = place.get_weather()
     cloudiness = weathercall.get_clouds()
     rain_status = weathercall.get_rain()
@@ -274,7 +277,7 @@ def WeatherNum() :
     return [cloudiness,rain_mm, temperature]
 
 def getNums() :
-    decibel = DecibelNum2()
+    decibel = DecibelNum()
     weather = WeatherNum()
     temperature = weather[2]
     clouds = weather[0]
@@ -572,8 +575,8 @@ def RunTheCode(new, credentials, playlists):
     return currentStats
 
 def Start(Keuze):
-    global userID,playListID
-    print(userID,playListID)
+    global userID,playListID, placeWeather
+    print(userID,playListID, placeWeather)
     currentStats = RunTheCode(Keuze, credentials, playlists)
     print('start gedaan!')
     return currentStats, GLOBALCurrentSongList
