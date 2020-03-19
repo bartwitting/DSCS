@@ -25,10 +25,16 @@ GLOBALCurrentSongList = pd.DataFrame()
 
 
 ########################################################################################################################################
-
 userURL = ""
 userID = ""
 playListID = ""
+
+def SaveIDs(user, playlist):
+    global userID, playListID
+    userID = user
+    playListID = playlist
+
+
 
 userID, playListID = "bartw26396", "5yJfsUa3aWq20QhPLGwtig"
 #userID, playListID = "zwamborn", "4jwcDPU0HyEw0cOAPPFOdp"
