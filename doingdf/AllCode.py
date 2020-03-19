@@ -33,18 +33,19 @@ def SaveIDs(user, playlist):
     global userID, playListID
     userID = user
     playListID = playlist
+    print (userID,playListID)
 
 
 
-userID, playListID = "bartw26396", "5yJfsUa3aWq20QhPLGwtig"
+#userID, playListID = "bartw26396", "5yJfsUa3aWq20QhPLGwtig"
 #userID, playListID = "zwamborn", "4jwcDPU0HyEw0cOAPPFOdp"
 print("Use this to run the code and fill the 'bool' place with True(will also fill the MusicData) or False(Just changing the playlist) : python3 -c 'from AllCode import*; Start(bool)' ")
 
 credentials = [userID, '5711bc132b4c48ceb5bbd19cd65b1e63', 'f507991961c948d8bf1b62ae6ef5ab15', 'http://localhost']
-playlists = {'Kasper Langendoen':'4W7jnrqeKfVEnb1BVHMG5b', 'Top 50 Wereld':'37i9dQZEVXbMDoHDwVN2tF', 'NPO Radio 2':'1DTzz7Nh2rJBnyFbjsH1Mh',\
-'daryl zandvliet':'6PoHyrIELxnRlRKOsI5yhW', 'Slam Official':'0OdWlUFdB6Lio5dIdXY81O', 'Bouke Bosma':'70aT8IllF7t6CLcPf2pt99'}
+#playlists = {'Kasper Langendoen':'4W7jnrqeKfVEnb1BVHMG5b', 'Top 50 Wereld':'37i9dQZEVXbMDoHDwVN2tF', 'NPO Radio 2':'1DTzz7Nh2rJBnyFbjsH1Mh',\
+#'daryl zandvliet':'6PoHyrIELxnRlRKOsI5yhW', 'Slam Official':'0OdWlUFdB6Lio5dIdXY81O', 'Bouke Bosma':'70aT8IllF7t6CLcPf2pt99'}
 
-
+playlist = {'Kasper Langendoen':'4W7jnrqeKfVEnb1BVHMG5b', 'Top 50 Wereld':'37i9dQZEVXbMDoHDwVN2tF'}
 
 def get_playlist_tracks(credentials,username,playlist_id):
     #set scope to retreive public data
@@ -571,4 +572,5 @@ def RunTheCode(new, credentials, playlists):
 
 def Start(Keuze):
     currentStats = RunTheCode(Keuze, credentials, playlists)
+    print('start gedaan!')
     return currentStats, GLOBALCurrentSongList
