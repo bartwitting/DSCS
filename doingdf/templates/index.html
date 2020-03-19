@@ -18,12 +18,19 @@
 <h2>Generating spotify playlists based on the weather, time, amount of people and sound in the store
 </h2> <br>
 
-<form method="POST">
+
+<form action = '/forward/' method="POST">
   <div class='container'>
   <div class="form-inline">
     <div class="form-group">
-      <p>Name <input type = "text" name = "Username" /></p>
-      <p>Playlist link <input type = "text" name = "Spotifylink" /></p>
+      <input type="text" name="Username" placeholder='Spotify username'>
+
+      <br>
+      <br>
+      <input type="text" name="Spotifylink" placeholder='Playlist link'>
+      <button name="forwardBtn" type="submit" onclick="$('#loading').show();" >Run Spotistore</button>
+
+
     </div>
     </div>
     </div>
@@ -34,7 +41,7 @@
 <br>
 <br>
     <form action="/forward/" method="post">
-        <button name="forwardBtn" type="submit" onclick="$('#loading').show();" >Run Spotistore</button>
+
     </form>
   </div>
   <br>
