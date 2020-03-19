@@ -30,12 +30,14 @@ def move_forward():
         SaveIDs(Spotusername,Playlink)
         results = Start(True)
         df = results[1]
-        return render_template('playlists.html',tables =[df.to_html(classes='playlist')],titles = ['na', 'Current playlist'], Username=Spotusername, Spotifylink=Playlink)
+        forward_message = results[0]
+        return render_template('playlists.html',forward_message=forward_message,tables =[df.to_html(classes='playlist')],titles = ['na', 'Current playlist'], Username=Spotusername, Spotifylink=Playlink)
 
     else:
         results = Start(False)
         df = results[1]
-        return render_template('playlists.html',tables =[df.to_html(classes='playlist')],titles = ['na', 'Current playlist'])
+        forward_message = results[0]
+        return render_template('playlists.html',forward_message=forward_message,tables =[df.to_html(classes='playlist')],titles = ['na', 'Current playlist'])
 
 if __name__ == '__main__':
     app.run(debug=True)
