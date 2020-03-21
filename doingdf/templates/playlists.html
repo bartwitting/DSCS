@@ -24,21 +24,29 @@
         </div>
       </div>
 
+      <div class='headline'>
+      <h1> Current settings</h1>
+    </div>
+      <br>
+        <div class="right">
+      {% for x in features| batch(2) %}<br><h2>{% for col in x %}{{col}} {% endfor %}</h2>{% endfor %}
 
-      <h1>The current situation</h1>
-      <h2>{{ forward_message }}</h2>
-      <h2> {{Username}}</h2>
-      <h2> {{Spotifylink}}</h2>
-      <h2> {{Weatherplace}}</h2>
+    {% for x in sources| batch(2) %}<br><h2>{% for col in x %}{{col}} {% endfor %}</h2>{% endfor %}
+      <br>
+      <h2> Username {{Username}}</h2>
+      <br>
 
+      <h2> Location {{Weatherplace}}</h2>
+      <br>
 
       <div class='container'>
         <form action="/forward/">
             <button name="forwardBtn" type="submit" onclick="$('#loading').show();" >Rerun file</button>
         </form>
       </div>
-    <div id="loading" style="display:none;"><img src="https://media.giphy.com/media/tXL4FHPSnVJ0A/giphy-downsized.gif" alt="" />Loading!</div>
+      </div>
+    <div id="loading" style="display:none;"><img src="https://media.giphy.com/media/tXL4FHPSnVJ0A/giphy-downsized.gif" alt="" /><br><h2>Loading!</div>
     </body>
-    </div>
+
   </body>
 </html>

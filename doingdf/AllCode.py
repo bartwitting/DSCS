@@ -486,6 +486,7 @@ def Tempo(decibel, people, temperature, rain, clouds, time):
 
     lo_total= (score_ruis + score_mens + score_temp+ score_uur)/10
     value = ((lo_total * (200 - 50) / 100) + 50)
+    value = round(value,2)
     return value
 
 def Valence(decibel, people, temperature, rain, clouds, time):
