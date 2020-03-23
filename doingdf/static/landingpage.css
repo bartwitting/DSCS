@@ -5,6 +5,7 @@ body {
   background-attachment: fixed;
   background-size: cover;
 }
+
 h1 {
 	font-family: font-family: 'Helvetica Neue', sans-serif;
 	font-size: 75px;
@@ -13,28 +14,67 @@ h1 {
 	font-weight: 500;
 	line-height: 26.4px;
 	text-align: center;
-	margin-top: 20%;
+	margin-top: 15%;
   color: #fff;
 
 
 }
-h2{font-family: 'Open Sans', sans-serif;
+h2 {
+  font-family: 'Open Sans', sans-serif;
   font-size: 30px;
   text-align: center;
   font-style: normal;
   font-variant: normal;
   color: #fff;
-  }
+  padding-right: 5%;
+  padding-left: 5%;
+}
 
-p{font-family: 'Helvetica Neue', sans-serif;
+.Loading {
+  -webkit-animation: color-change 1s infinite;
+  -moz-animation: color-change 1s infinite;
+  -o-animation: color-change 1s infinite;
+  -ms-animation: color-change 1s infinite;
+  animation: color-change 1s infinite;
+}
+
+@-webkit-keyframes color-change {
+  0% { color: white; }
+  50% { color: lightgrey; }
+  100% { color: grey; }
+}
+@-moz-keyframes color-change {
+  0% { color: white; }
+  50% { color: lightgrey; }
+  100% { color: grey; }
+}
+@-ms-keyframes color-change {
+  0% { color: white; }
+  50% { color: lightgrey; }
+  100% { color: grey; }
+}
+@-o-keyframes color-change {
+  0% { color: white; }
+  50% { color: lightgrey; }
+  100% { color: grey; }
+}
+@keyframes color-change {
+  0% { color: white; }
+  50% { color: lightgrey; }
+  100% { color: grey; }
+}
+
+p {
+  font-family: 'Helvetica Neue', sans-serif;
   font-size: 20px;
   text-align: center;
   font-style: normal;
   font-variant: normal;
   color: #fff;
-  text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;}
+  text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
+}
 
-  button {
+button {
   color: #fff;
   text-transform: uppercase;
   text-decoration: none;
@@ -46,41 +86,37 @@ p{font-family: 'Helvetica Neue', sans-serif;
   margin:auto;
   display:block;
   width:15;
-  
-  }
+}
 
-  button:hover {
+button:hover {
   background: #434343;
   letter-spacing: 1px;
   -webkit-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
   -moz-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
   box-shadow: 5px 40px -10px rgba(0,0,0,0.57);
   transition: all 0.4s ease 0s;
-  }
-
- div.foot {
-    background-color:#42b273;
-    color:white;
-    text-align:center;
-   padding:3px;
-    position: fixed;
-    width: 100%;
-    bottom: 0px;
-    margin: 0 auto;
-       font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
- }
-
- div.container{
-   text-align:center;
-
 }
-div.gifje{text-align: center;
 
+div.foot {
+  background-color:#42b273;
+  color:white;
+  text-align:center;
+  padding:3px;
+  position: fixed;
+  width: 100%;
+  bottom: 0px;
+  margin: 0 auto;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
 
+div.container {
+  text-align:center;
+}
 
+div.gifje {
+  text-align: center;
+}
 
- }
-
- form-inline{
-   text-align: center;
- }
+form-inline {
+  text-align: center;
+}

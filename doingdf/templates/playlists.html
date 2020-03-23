@@ -1,52 +1,56 @@
 <!DOCTYPE html>
 <html>
-<head>
-<link rel=stylesheet type=text/css href='/../static/playlists.css'>
+  <head>
+    <link rel=stylesheet type=text/css href='/../static/playlists.css'>
 
-<title>Playlist</title>
+    <title>Playlist</title>
 
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"> </script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"> </script>
     <script type=text/javascript> $(function() { $("#mybutton").click(function (event) { $.getJSON('/SomeFunction', { },
-    function(data) { }); return false; }); }); </script>
-</head>
-
-
-
+      function(data) { }); return false; }); }); 
+    </script>
+  </head>
+  
   <body>
     <div class="row">
       <div class="left">
         <div class=page>
           <h1>Playlists</h1>
           {% for table in tables %}
-            <h2>{{titles[loop.index]}}</h2>
-            {{ table|safe }}
+          <h2>{{titles[loop.index]}}</h2>
+          {{ table|safe }}
           {% endfor %}
         </div>
       </div>
 
       <div class='headline'>
-      <h1> Current settings</h1>
-    </div>
-      <br>
-        <div class="right">
-      {% for x in features| batch(2) %}<br><h2>{% for col in x %}{{col}} {% endfor %}</h2>{% endfor %}
+        <h1> Current settings</h1>
+      </div>
 
-    {% for x in sources| batch(2) %}<br><h2>{% for col in x %}{{col}} {% endfor %}</h2>{% endfor %}
-      <br>
-      <h2> Username {{Username}}</h2>
       <br>
 
-      <h2> Location {{Weatherplace}}</h2>
-      <br>
+      <div class="right">
+        {% for x in features| batch(2) %}<br><h2>{% for col in x %}{{col}} {% endfor %}</h2>{% endfor %}
+        <br><br>
+        {% for x in sources| batch(2) %}<br><h2>{% for col in x %}{{col}} {% endfor %}</h2>{% endfor %}
+        <br><br>
+        <h2> Username: {{Username}}</h2>
+        <br>
 
-      <div class='container'>
-        <form action="/forward/">
+        <h2> Location: {{Weatherplace}}</h2>
+        <br>
+
+        <div class='container'>
+          <form action="/forward/">
             <button name="forwardBtn" type="submit" onclick="$('#loading').show();" >Rerun file</button>
-        </form>
+          </form>
+        </div>
       </div>
-      </div>
-    <div id="loading" style="display:none;"><img src="https://media.giphy.com/media/tXL4FHPSnVJ0A/giphy-downsized.gif" alt="" /><br><h2>Loading!</div>
-    </body>
 
+      <div id="loading" style="display:none;"><img src="https://media.giphy.com/media/tXL4FHPSnVJ0A/giphy-downsized.gif" alt="" />
+      <br>
+      <h2>Loading!</h2>
+      </div>
+    </div>
   </body>
 </html>

@@ -35,7 +35,6 @@ def SaveIDs(user, playlist, place):
     userID = user
     playListID = playlist
     placeWeather= place
-    print (userID,playListID, placeWeather)
 
 
 
@@ -45,10 +44,10 @@ def SaveIDs(user, playlist, place):
 #print("Use this to run the code and fill the 'bool' place with True(will also fill the MusicData) or False(Just changing the playlist) : python3 -c 'from AllCode import*; Start(bool)' ")
 
 credentials = [userID, '5711bc132b4c48ceb5bbd19cd65b1e63', 'f507991961c948d8bf1b62ae6ef5ab15', 'http://localhost']
-#playlists = {'Kasper Langendoen':'4W7jnrqeKfVEnb1BVHMG5b', 'Top 50 Wereld':'37i9dQZEVXbMDoHDwVN2tF', 'NPO Radio 2':'1DTzz7Nh2rJBnyFbjsH1Mh',\
-#'daryl zandvliet':'6PoHyrIELxnRlRKOsI5yhW', 'Slam Official':'0OdWlUFdB6Lio5dIdXY81O', 'Bouke Bosma':'70aT8IllF7t6CLcPf2pt99'}
+playlists = {'Kasper Langendoen':'4W7jnrqeKfVEnb1BVHMG5b', 'Top 50 Wereld':'37i9dQZEVXbMDoHDwVN2tF', 'NPO Radio 2':'1DTzz7Nh2rJBnyFbjsH1Mh',\
+'daryl zandvliet':'6PoHyrIELxnRlRKOsI5yhW', 'Slam Official':'0OdWlUFdB6Lio5dIdXY81O', 'Bouke Bosma':'70aT8IllF7t6CLcPf2pt99'}
 
-playlists = {'Kasper Langendoen':'4W7jnrqeKfVEnb1BVHMG5b', 'Top 50 Wereld':'37i9dQZEVXbMDoHDwVN2tF','Slam Official':'0OdWlUFdB6Lio5dIdXY81O'}
+#playlists = {'Kasper Langendoen':'4W7jnrqeKfVEnb1BVHMG5b', 'Top 50 Wereld':'37i9dQZEVXbMDoHDwVN2tF','Slam Official':'0OdWlUFdB6Lio5dIdXY81O'}
 
 def get_playlist_tracks(credentials,username,playlist_id):
     #set scope to retreive public data
@@ -546,8 +545,8 @@ def RunAll(source):
     return [danceability, energy, loudness, tempo, valence]
 
 def StatRetrieval(source, features):
-    namelist1 = ['danceability','energy','loudness','tempo','valence']
-    namelist2 = ['Decibel', 'NumPeople', 'Temperature', 'Rain', 'Clouds', 'Time']
+    namelist1 = ['Danceability','Energy','Loudness','Tempo','Valence']
+    namelist2 = ['Decibel(db):', 'NumberOfPeople(#):', 'Temperature(C):', 'Rain(%):', 'Clouds(%):', 'Time(h):']
     Numlist = []
     DataList = []
     for i in range(len(features)):
@@ -577,7 +576,6 @@ def RunTheCode(new, credentials, playlists):
 
 def Start(Keuze):
     global userID,playListID, placeWeather
-    print(userID,playListID, placeWeather)
     currentStats = RunTheCode(Keuze, credentials, playlists)
     print('start gedaan!')
     return currentStats, GLOBALCurrentSongList
