@@ -4,9 +4,12 @@ import requests
 from io import BytesIO
 print(sp.current_user_playing_track()['item']['artists'][0]['name'])
 print(sp.current_user_playing_track()['item']['name'])
-response = requests.get(sp.current_user_playing_track()['item']['album']['images'][0]['url'])
-img = Image.open(BytesIO(response.content))
-img
+
+
+def ImageChecker():
+    response = requests.get(sp.current_user_playing_track()['item']['album']['images'][0]['url'])
+    img = Image.open(BytesIO(response.content))
+    return img
 
 def check_song():
     current_song = sp.current_user_playing_track()['item']['name']
@@ -31,3 +34,5 @@ def check_song():
         print(current_song)
         display(current_img)
         check_song()
+
+ImageChecker()
