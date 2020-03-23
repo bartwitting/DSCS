@@ -3,3 +3,4 @@
 __pycache__
 oui.txt
 .cache-
+*/.cache/*
