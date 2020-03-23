@@ -10,29 +10,35 @@
       function(data) { }); return false; }); }); 
     </script>
   </head>
-  
+  <nav>
+    <div class="row">
+      <div class="leftTitle">
+        <h1>Current Playlist</h1>
+      </div>
+      <div class="rightTitle">
+        <h1> Current Settings</h1>
+      </div>
+    </div>
+  </nav>
   <body>
     <div class="row">
       <div class="left">
         <div class=page>
-          <h1>Playlists</h1>
           {% for table in tables %}
-          <h2>{{titles[loop.index]}}</h2>
           {{ table|safe }}
           {% endfor %}
         </div>
       </div>
-
-      <div class='headline'>
-        <h1> Current settings</h1>
-      </div>
-
-      <br>
-
       <div class="right">
-        {% for x in features| batch(2) %}<br><h2>{% for col in x %}{{col}} {% endfor %}</h2>{% endfor %}
-        <br><br>
+        <div id="loading" style="display:none;">
+          <br>
+          <h2 class="Loading">Loading!</h2>
+          <br>
+          <img src="https://media.giphy.com/media/tXL4FHPSnVJ0A/giphy-downsized.gif" alt="" />
+        </div>
         {% for x in sources| batch(2) %}<br><h2>{% for col in x %}{{col}} {% endfor %}</h2>{% endfor %}
+        <br><br>
+        {% for x in features| batch(2) %}<br><h2>{% for col in x %}{{col}} {% endfor %}</h2>{% endfor %}
         <br><br>
         <h2> Username: {{Username}}</h2>
         <br>
@@ -45,11 +51,6 @@
             <button name="forwardBtn" type="submit" onclick="$('#loading').show();" >Rerun file</button>
           </form>
         </div>
-      </div>
-
-      <div id="loading" style="display:none;"><img src="https://media.giphy.com/media/tXL4FHPSnVJ0A/giphy-downsized.gif" alt="" />
-      <br>
-      <h2>Loading!</h2>
       </div>
     </div>
   </body>
