@@ -451,6 +451,7 @@ def Loudness(decibel, people, temperature, rain, clouds, time):
 
     lo_total= (score_ruis + score_mens + score_uur)/10
     value = ((lo_total * (0 - -30) / 100) + -30)
+    value = round(value,2)
     return value
 
 def Tempo(decibel, people, temperature, rain, clouds, time):
@@ -545,7 +546,7 @@ def RunAll(source):
     return [danceability, energy, loudness, tempo, valence]
 
 def StatRetrieval(source, features):
-    namelist1 = ['Danceability','Energy','Loudness','Tempo','Valence']
+    namelist1 = ['Danceability:','Energy:','Loudness:','Tempo:','Valence:']
     namelist2 = ['Decibel(db):', 'NumberOfPeople(#):', 'Temperature(C):', 'Rain(%):', 'Clouds(%):', 'Time(h):']
     Numlist = []
     DataList = []

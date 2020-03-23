@@ -27,15 +27,15 @@ table.dataframe, .dataframe th, .dataframe td {
     text-align: center;
 }
 
-tr:nth-child(odd) { 
-  background-color:#eee; 
+tr:nth-child(odd) {
+  background-color:#eee;
 }
 
-tr:nth-child(even) { 
-  background-color:#fff; 
+tr:nth-child(even) {
+  background-color:#fff;
 }
 
-tr:hover { 
+tr:hover {
   background-color: #535353;
 }
 
@@ -58,13 +58,13 @@ tr:hover {
 
 .left {
 	float: left;
-	width: 70%;
+	width: 80%;
 	background-color: #white;
 }
 
 .right {
 	float: right;
-	width: 30%;
+	width: 20%;
 	background-color: #212121;
   text-align: center;
   color:white;
