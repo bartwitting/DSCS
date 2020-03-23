@@ -26,13 +26,28 @@
               <h2 class="Loading">Loading!</h2>
             </div>
             <br>
-            <input type="text" name="Username" placeholder='Spotify username'>
+            <div class="help">
+              <input type="text" name="Username" placeholder='Spotify username' required>
+              <div class="help-tip">
+                <p>The username can be found with "Account information in spotify</p>
+              </div>
+            </div>
             <br>
             <br>
-            <input type="text" name="Spotifylink" placeholder='Playlist link'>
+            <div class="help">
+              <input type="text" name="Spotifylink" placeholder='Playlist link' required>
+              <div class="help-tip">
+                <p>The playlist link can be found with the three dots in the playlist --> "Share" --> "Copy Spotify-URI". Now only paste the part after "spotify:playlist:"</p>
+              </div>
+            </div>
             <br>
             <br>
-            <input type="text" name="placeWeather" placeholder='Place'>
+            <div class="help">
+              <input type="text" name="placeWeather" placeholder='Place' required>
+              <div class="help-tip">
+                <p>Enter City, Country. Example: "Amsterdam, NL"</p>
+              </div>
+            </div>
             <br>
             <br>
             <button name="forwardBtn" type="submit" onclick="$('#loading').show();" >Run Spotistore

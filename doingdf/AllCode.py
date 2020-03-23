@@ -545,6 +545,14 @@ def RunAll(source):
 
     return [danceability, energy, loudness, tempo, valence]
 
+
+
+
+
+########################################################################################################################################
+
+
+
 def StatRetrieval(source, features):
     namelist1 = ['Danceability:','Energy:','Loudness:','Tempo:','Valence:']
     namelist2 = ['Decibel(db):', 'NumberOfPeople(#):', 'Temperature(C):', 'Rain(%):', 'Clouds(%):', 'Time(h):']
