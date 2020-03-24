@@ -583,8 +583,7 @@ def RunTheCode(new, credentials, playlists):
 
     return currentStats
 
-def Start(Keuze):
-    global userID,playListID, placeWeather
-    currentStats = RunTheCode(Keuze, credentials, playlists)
-    print('start gedaan!')
-    return currentStats, GLOBALCurrentSongList
+def Start(Choice):
+	currentStats = RunTheCode(Choice, credentials, playlists)
+	print("start gedaan!")
+	return currentStats, GLOBALCurrentSongList
