@@ -555,7 +555,7 @@ def RunAll(source):
 
 def StatRetrieval(source, features):
     namelist1 = ['Danceability:','Energy:','Loudness:','Tempo:','Valence:']
-    namelist2 = ['Decibel(db):', 'NumberOfPeople(#):', 'Temperature(C):', 'Rain(%):', 'Clouds(%):', 'Time(h):']
+    namelist2 = ['Decibel(db):', 'NumberOfPeople(#):', 'Temperature(C):', 'Rain(mm):', 'Clouds(%):', 'Time(h):']
     Numlist = []
     DataList = []
     for i in range(len(features)):
