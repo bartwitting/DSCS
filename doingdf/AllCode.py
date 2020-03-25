@@ -104,7 +104,7 @@ def add_tracks_from_df(credentials,playlist,dataframe,features):
     (dataframe['energy'].between(features[1]-0.2, features[1]+0.2, inclusive=False)) &\
     (dataframe['loudness'].between(features[2]-5, features[2]+5, inclusive=False)) &\
     (dataframe['tempo'].between(features[3]-40, features[3]+40, inclusive=False)) &\
-    (dataframe['valence'].between(features[4]-0.5, features[4]+0.5, inclusive=False))]
+    (dataframe['valence'].between(features[4]-0.1, features[4]+0.1, inclusive=False))]
     #remove unwanted artists
     # & (~dataframe['artist'].isin(['Ariana Grande']))]
     selection.sort_values(by=['popularity'], ascending=False)
