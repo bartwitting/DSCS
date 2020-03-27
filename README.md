@@ -1,5 +1,5 @@
 # DSCS
-This is the git repository for the service SpotiStore made by Hidde de Haan, Auke Pals, Bart Witting, Daryl Zandvliet and Ferdi Zwamborn. 
+This is the git repository for the service SpotiStore made by Hidde de Haan, Auke Pals, Bart Witting, Saskia Woortman, Daryl Zandvliet and Ferdi Zwamborn. 
 
 The service is built for the course Data, Sensors and Complex Services from the University of Amsterdam. 
 
