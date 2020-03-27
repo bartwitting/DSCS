@@ -17,6 +17,6 @@ Move towards the Service folder inside the terminal or commandline. Run the foll
 
 ### Screenshots of the service:
 Main page
-![Main page](/ImagesREADMe/landigpage.png)<br/>
+![Main page](/ImagesREADMe/landingpage.png)<br/>
 Playlist page
 ![Playlist page](/ImagesREADMe/playlistpage.png)<br/>
