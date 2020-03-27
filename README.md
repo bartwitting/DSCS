@@ -1,7 +1,7 @@
 # DSCS
 This is the git repository for the service SpotiStore made by Hidde de Haan, Auke Pals, Bart Witting, Saskia Woortman, Daryl Zandvliet and Ferdi Zwamborn. 
 
-The service is built for the course Data, Sensors and Complex Services from the University of Amsterdam. 
+The service is built for the course Data, Sensors and Complex Services(DSCS) from the University of Amsterdam. 
 
 For this service the following API's are used: Spotify and OpenWeatherAPI.
 
