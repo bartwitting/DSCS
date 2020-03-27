@@ -27,10 +27,11 @@ def move_forward():
         Playlink = request.form['Spotifylink']
         weatherPlace = request.form['placeWeather']
         session['Username'] = Spotusername
-        session ['placeWeather'] = weatherPlace 
+        session ['placeWeather'] = weatherPlace
         SaveIDs(Spotusername,Playlink, weatherPlace)
         results = Start(True)
         df = results[1]
+        df = df.sort_values(by=['popularity'], ascending=False)
         forward_message = results[0]
         features = forward_message[0]
         sources=forward_message[1]
@@ -42,6 +43,7 @@ def move_forward():
     else:
         results = Start(False)
         df = results[1]
+        df = df.sort_values(by=['popularity'], ascending=False)
         forward_message = results[0]
         features = forward_message[0]
         sources=forward_message[1]
